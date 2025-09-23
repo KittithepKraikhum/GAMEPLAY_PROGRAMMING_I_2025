@@ -1,10 +1,9 @@
 #include <iostream>
 
 int main(){
-	int arr[] = {10, 20, 30};
-	int size = sizeof(arr)/sizeof(arr[0]);
-	int *pArr = arr;
-	for(int i = 0; i < size; i++){
-	std::cout<<"Element "<<i<<" is: "<< *(pArr+i)<<"\n";
-	}//end for
+	int x = 5;
+	int *px = &x;
+	std::cout<<"Address of x: "<<px<<"\n";
+	std::cout<<"Value of x: "<<*px<<"\n";
+	return 0;
 }//end main
