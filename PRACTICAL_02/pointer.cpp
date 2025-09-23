@@ -1,10 +1,12 @@
 #include <iostream>
 
 int main(){
-	int a = 10;  //normal variable
-	int *p = &a; //a pointer holding address of a
-	std::cout<<"The first initial value of a is "<< a <<"\n";
-	*p = 30; //assign a new value to a
-	std::cout<<"New value of a is "<< a <<"\n";
+	int *dynamicArray = new int[5]; //Allocates memory for 5 integers
+for(int i = 0; i < 5; i++){
+	dynamicArray[i] = i + 1; //Assign values to the array
+	std::cout<<dynamicArray[i]<<"\n";
+}//end for
+
+delete[] dynamicArray; //Frees the allocated memory
 
 }//end main
