@@ -75,18 +75,40 @@ int main()
 
 //Simple text menu to launch missiles or quit
 
-  //user input
+  //user input variables
   int userPlay = 0;
+  int warhead = 0;
+  int count = 0;
+  printf("\n");
   printf("Welcome to Missile Defence Game\n");
   printf("Press 0 to exit the game\n");
   printf("Press 1 to Launch Missile\n");
+  
+  //get user input
   scanf("%d",&userPlay);
 
    if(userPlay == 0)
         {
           printf("Goodbye!\n");
-          return 0;
-        }	
+          return 0; //exit program
+        }
+	
+  printf("Please select Warhead type\n");
+  printf("Press 1 to select Explosive\n");
+  printf("Press 2 to select Nuclear\n");
+
+  while(count < 1){
+  getchar();
+  scanf("%d",&warhead);
+	if(warhead == 1 || warhead == 2)
+        {
+	   count++;
+        }
+	else
+        {
+          printf("Please select Warhead type!\n");
+        }
+}
 
   // Print Target Coordinates
   printf("Print Target Coordinates\n");
