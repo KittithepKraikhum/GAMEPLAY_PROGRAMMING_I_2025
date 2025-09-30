@@ -146,8 +146,8 @@ if(strcmp(password,"DEFCON1") == 0)
    Missile missile; //declare a variable
    missile.armed = true;
 
-   printf("Correct password\n");
-   printf("Missile armed!\n");}
+   printf("Successful \n");
+   printf("Missile armed\n");}
 
 else{
    printf("Incorrect password");
@@ -156,8 +156,26 @@ else{
 
 
 printf("\n");
+
+int targetX = 0;
+int targetY = 0;
+
+printf("Please enter the desire location x: ");
+scanf("%d",&targetX);
+
+printf("Please enter the desire location Y: ");
+scanf("%d",&targetY);
+
+//checking collision
+if(targetX == target->coordinates.x 
+&& targetY == target->coordinates.y
+){
+  printf("\n");
+  printf("Target Hit!\n");
+  printf("\n");
+}
   
-// Print Target Coordinates
+//Print Target Coordinates
   printf("Print Target Coordinates\n");
   printCoordinates(target->coordinates);
 
@@ -165,7 +183,7 @@ printf("\n");
   Missile *missile = (Missile *)malloc(sizeof(Missile));
 
   // Set Missile Payload
-  missile->payload = EXPLOSIVE;
+  missile->payload = warhead;
   missile->arm = armMissile;
   missile->update = updateMissile;
 
