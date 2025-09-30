@@ -73,6 +73,21 @@ int main()
   target->coordinates.x = 2;
   target->coordinates.y = 2;
 
+//Simple text menu to launch missiles or quit
+
+  //user input
+  int userPlay = 0;
+  printf("Welcome to Missile Defence Game\n");
+  printf("Press 0 to exit the game\n");
+  printf("Press 1 to Launch Missile\n");
+  scanf("%d",&userPlay);
+
+   if(userPlay == 0)
+        {
+          printf("Goodbye!\n");
+          return 0;
+        }	
+
   // Print Target Coordinates
   printf("Print Target Coordinates\n");
   printCoordinates(target->coordinates);
