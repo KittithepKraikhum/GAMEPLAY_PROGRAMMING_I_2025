@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-
+#include <cstring>
 // Define Position xy struct
 typedef struct Position
 {
@@ -79,6 +79,7 @@ int main()
   int userPlay = 0;
   int count = 0;
   WarHead warhead = EXPLOSIVE;
+  char password[10];
 
   printf("\n");
   printf("Welcome to Missile Defence Game\n");
@@ -93,7 +94,7 @@ int main()
           printf("Goodbye!\n");
           return 0; //exit program
         }
-	
+  
   printf("Please select Warhead type\n");
   printf("Press 0 to select Explosive\n");
   printf("Press 1 to select Nuclear\n");
@@ -101,6 +102,7 @@ int main()
   while(count < 1){
   getchar();
   scanf("%d",&warhead); //get user input
+  printf("\n"); //endl
 
 	if(warhead == EXPLOSIVE || warhead == NUCLEAR)
         {
@@ -121,8 +123,27 @@ int main()
 
 else
 {
- printf("You have select Nuclear missile!\n");
+ printf("You have select Nuclear missile! (Unarmed)\n");
 }//end else
+
+
+printf("Please enter password to arm missile\n");
+scanf("%s",password);
+
+printf("\n"); //endl
+
+if(strcmp(password,"DEFCON1") == 0)
+{
+ Missile missile; //declare a variable
+ missile.armed = true;
+printf("Correct password\n");
+ printf("Missile armed!\n");
+}
+else{
+ printf("Incorrect password");
+ return 0;
+}//end else
+printf("\n");
   // Print Target Coordinates
   printf("Print Target Coordinates\n");
   printCoordinates(target->coordinates);
