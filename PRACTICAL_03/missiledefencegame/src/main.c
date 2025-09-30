@@ -63,6 +63,15 @@ void printCoordinates(Coordinates c)
   printf("X: %d, Y: %d\n", c.x, c.y);
 }
 
+// Function to print menu
+void showMenu() {
+    printf("\n");
+    printf("Welcome to Missile Defence Game\n");
+    printf("Press 0 to exit the game\n");
+    printf("Press 1 to Launch Missile\n");
+}
+
+
 // Main entry point for the game
 int main()
 {
@@ -75,29 +84,29 @@ int main()
 
 //Simple text menu to launch missiles or quit
 
-  //user input variables
-  int userPlay = 0;
-  int count = 0;
-  WarHead warhead = EXPLOSIVE;
-  char password[10];
+	  showMenu();
 
-  printf("\n");
-  printf("Welcome to Missile Defence Game\n");
-  printf("Press 0 to exit the game\n");
-  printf("Press 1 to Launch Missile\n");
-  
-  //get user input
-  scanf("%d",&userPlay);
+//variables	
+	int userPlay = 0;
+  	int count = 0;
+  	WarHead warhead = EXPLOSIVE;
+  	char password[10];
+
+//get user input
+scanf("%d",&userPlay);
 
    if(userPlay == 0)
         {
           printf("Goodbye!\n");
           return 0; //exit program
         }
-  
-  printf("Please select Warhead type\n");
-  printf("Press 0 to select Explosive\n");
-  printf("Press 1 to select Nuclear\n");
+  else   
+	{  //Any key to continue
+	   printf("Please select Warhead type\n");
+           printf("Press 0 to select Explosive\n");
+           printf("Press 1 to select Nuclear\n");
+	}
+
 
   while(count < 1){
   getchar();
@@ -134,17 +143,21 @@ printf("\n"); //endl
 
 if(strcmp(password,"DEFCON1") == 0)
 {
- Missile missile; //declare a variable
- missile.armed = true;
-printf("Correct password\n");
- printf("Missile armed!\n");
-}
+   Missile missile; //declare a variable
+   missile.armed = true;
+
+   printf("Correct password\n");
+   printf("Missile armed!\n");}
+
 else{
- printf("Incorrect password");
- return 0;
-}//end else
+   printf("Incorrect password");
+   return 0; 
+    }
+
+
 printf("\n");
-  // Print Target Coordinates
+  
+// Print Target Coordinates
   printf("Print Target Coordinates\n");
   printCoordinates(target->coordinates);
 
