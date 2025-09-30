@@ -77,8 +77,9 @@ int main()
 
   //user input variables
   int userPlay = 0;
-  int warhead = 0;
   int count = 0;
+  WarHead warhead = EXPLOSIVE;
+
   printf("\n");
   printf("Welcome to Missile Defence Game\n");
   printf("Press 0 to exit the game\n");
@@ -94,22 +95,34 @@ int main()
         }
 	
   printf("Please select Warhead type\n");
-  printf("Press 1 to select Explosive\n");
-  printf("Press 2 to select Nuclear\n");
+  printf("Press 0 to select Explosive\n");
+  printf("Press 1 to select Nuclear\n");
 
   while(count < 1){
   getchar();
-  scanf("%d",&warhead);
-	if(warhead == 1 || warhead == 2)
+  scanf("%d",&warhead); //get user input
+
+	if(warhead == EXPLOSIVE || warhead == NUCLEAR)
         {
-	   count++;
+	   count++; //if user pick one of the warhead type do increment count to exit the loop
         }
 	else
         {
           printf("Please select Warhead type!\n");
         }
+
+}//end while
+
+
+ if(warhead == EXPLOSIVE)
+{
+ printf("You have selected Explosive missile (Unarmed)\n");
 }
 
+else
+{
+ printf("You have select Nuclear missile!\n");
+}//end else
   // Print Target Coordinates
   printf("Print Target Coordinates\n");
   printCoordinates(target->coordinates);
