@@ -91,6 +91,7 @@ int main()
   	int count = 0;
   	WarHead warhead = EXPLOSIVE;
   	char password[10];
+        bool passCorrect = false;
 
 //get user input
 scanf("%d",&userPlay);
@@ -144,16 +145,16 @@ printf("\n"); //endl
 if(strcmp(password,"DEFCON1") == 0)
 {
    Missile missile; //declare a variable
-   missile.armed = true;
 
    printf("Successful \n");
-   printf("Missile armed\n");}
+   printf("Missile armed\n");
+}
 
-else{
+else
+{
    printf("Incorrect password");
-   return 0; 
-    }
-
+   return 0; //exit program
+}
 
 printf("\n");
 
@@ -183,8 +184,9 @@ if(targetX == target->coordinates.x
   Missile *missile = (Missile *)malloc(sizeof(Missile));
 
   // Set Missile Payload
-  missile->payload = warhead;
+  missile->armed = false; //safe initialization 
   missile->arm = armMissile;
+  missile->payload = warhead;
   missile->update = updateMissile;
 
   // Set Missile Armed Status
