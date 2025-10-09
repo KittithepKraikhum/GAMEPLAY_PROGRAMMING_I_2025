@@ -87,6 +87,12 @@ public:
 
 int main()
 {
+    int choice = 0;
+    std::cout<<"\n";
+    std::cout<<"Please choose your character\n";
+    std::cout<<"1. Orc\n";
+    std::cout<<"2. Troll\n";
+    std::cin >> choice;
     Game game;
     game.gameloop();
     cin.get();
