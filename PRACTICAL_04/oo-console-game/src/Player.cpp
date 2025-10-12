@@ -13,10 +13,10 @@ void Player::walk() {
 }
 
 // Implementation of pure virtual attack method
-void Player::attack(GameObject& target) {
+void Player::attack(GameObject& target, int t_damage) {
     std::cout << name << " attacks " << target.getName() << "!" << std::endl;
     // Add logic to modify the target's health
-    target.takeDamage(10); // Example: deal 10 damage to the target
+    target.takeDamage(t_damage); // Example: deal 10 damage to the target
 }
 
 // Optionally override defend method

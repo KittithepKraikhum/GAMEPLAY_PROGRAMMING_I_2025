@@ -11,7 +11,7 @@ public:
 
     void charge();                            // Method for Player to charge at an enemy
     void walk() override;                     // Specific implementation of walk()
-    void attack(GameObject& target) override; // Implementation of pure virtual attack method
+    void attack(GameObject& target, int t_damage) override; // Implementation of pure virtual attack method
     void defend() override;                   // Optionally override defend method
 };
 

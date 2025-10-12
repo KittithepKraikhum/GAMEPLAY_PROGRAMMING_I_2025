@@ -26,7 +26,7 @@ public:
     std::string getName() const;
 
     // Pure virtual function for attack. This function must be implemented by derived classes.
-    virtual void attack(GameObject&) = 0;
+    virtual void attack(GameObject&,int t_damage) = 0;
 
     // Virtual method for defense. This can be overridden by derived classes if needed.
     virtual void defend();
