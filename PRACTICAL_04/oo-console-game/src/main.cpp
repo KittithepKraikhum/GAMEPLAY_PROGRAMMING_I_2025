@@ -14,7 +14,7 @@ private:
     GameObject *winner = nullptr;
 
 public:
-    Game() : player("Orc (Player)"), npc("Troll (Boss)") {}
+    Game(std::string playerName, std::string npcName) : player(playerName), npc(npcName) {}
 
     void gameloop()
     {
@@ -93,7 +93,22 @@ int main()
     std::cout<<"1. Orc\n";
     std::cout<<"2. Troll\n";
     std::cin >> choice;
-    Game game;
+
+  std::string m_playerName = ""; 
+  std::string m_npcName = "";
+
+   if(choice == 1){
+	m_playerName = "player(Orc)";
+        m_npcName = "npc(Troll)";
+   }
+
+   else
+	{
+  	  m_playerName = "player(Troll)";
+	  m_npcName = "npc(Orc)";
+
+	}
+    Game game(m_playerName, m_npcName);
     game.gameloop();
     cin.get();
 }
