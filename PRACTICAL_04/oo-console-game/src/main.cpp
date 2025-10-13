@@ -23,12 +23,12 @@ public:
        int swordCool = 0;
        int shieldCool = 0;
        int defenCool = 0;
+       bool onCoolDown = false;
  
 	cout<<"You are an "<<player.getName()<<". Choose your action:"<<endl;
 
  while (player.getHealth() > 0 && npc.getHealth() > 0)
 {
-
 	if(player.getName() == "Orc")
 	{
           int choice = 0;
@@ -37,34 +37,48 @@ public:
 	  cout<<"2. Shield Bash (Power: 25, Cooldwon: "<<shieldCool<<endl;
 	  cout<<"3. Defensive Stance (Negates next attack, Cooldown: "<<defenCool<<endl;
 	  cin>>choice;
+	if(choice == 1 && swordCool > 0)
+		continue;
+	if(choice == 2 && shieldCool > 0)
+		continue;
+	if(choice == 3 && defenCool > 0)
+		continue;
     
-        if(swordCool > 0)  //Decrement coolDown after each round
+        if(swordCool > 0 && onCoolDown == true)  //Decrement coolDown after each round
 	{
 	 swordCool--;
 	}
-	if(shieldCool > 0) //Decrement coolDown after each round
+	if(shieldCool > 0 && onCoolDown == true) //Decrement coolDown after each round
 	{
 	 shieldCool--;
 	}
-	 if(defenCool > 0)
+	 if(defenCool > 0 && onCoolDown == true)
 	{
 	 defenCool--;
 	}
 
-	if(choice == 1)
+	if(choice == 1 && swordCool == 0)
 	{       swordCool = 2; 
+		onCoolDown = true;
 		cout<<"You used Sword Slash!\n";
 		player.attack(npc,15);}
-	else if(choice == 2)
+	else if(choice == 2 && shieldCool == 0)
 		{shieldCool = 1;
+		onCoolDown = true;
 		cout<<"You used Shield Bash!\n";
 		player.attack(npc,25);}
-	else if(choice == 3)
+	else if(choice == 3 && defenCool == 0)
       	{  
-	  defenCool = 1;  
+	  defenCool = 3;
+	  onCoolDown = true;  
           cout<<"You used Defensive Stance!\n";
 	}
-	
+	else
+	   {
+		cout<<"Opps! looks like your skill is on cool down\n";
+		cout<<"Please choose you skill again\n";
+		onCoolDown = false;
+		continue;}
 	}//end if	 
 
 
