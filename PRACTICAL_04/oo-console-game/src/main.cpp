@@ -1,4 +1,6 @@
 #include <iostream>
+#include <cstdlib>   // gives you rand() and srand()
+#include <ctime>
 
 #include <./include/Player.h>
 #include <./include/NPC.h>
@@ -25,10 +27,13 @@ public:
 	if(player.getName() == "Orc")
 	{
 	  int choice = 0;
+	  int swordCool = 0;
+	  int shieldCool = 0;
+	  int defenCool = 0;
 
-	  cout<<"1. Sword Slash (Power: 15, Cooldown: 2)\n";
-	  cout<<"2. Shield Bash (Power: 25, Cooldwon: 1)\n";
-	  cout<<"3. Defensive Stance (Negates next attack, Cooldown: 3)\n:";
+	  cout<<"1. Sword Slash (Power: 15, Cooldown: "<<swordCool<<endl;
+	  cout<<"2. Shield Bash (Power: 25, Cooldwon: "<<shieldCool<<endl;
+	  cout<<"3. Defensive Stance (Negates next attack, Cooldown: "<<defenCool<<endl;
 	  cin>>choice;
     	  
 	if(choice == 1)
@@ -38,8 +43,9 @@ public:
 		{cout<<"You used Shield Bash!\n";
 		player.attack(npc,25);}
 	else if(choice == 3)
-		{cout<<"You used Defensive Stance!\n";}
-	}	 
+		cout<<"You used Defensive Stance!\n";
+	
+	}//end if	 
 
 
 	else if(player.getName() == "Troll")
@@ -61,7 +67,13 @@ public:
 	
 	
 }
-	 npc.attack(player, 10);
+	if(player.getName() == "Orc")
+	{
+          //npc = troll damage 20 or 15
+	  int damage[] = {15,25};
+	  int randomDamage = damage[rand()%2];	
+	  npc.attack(player, randomDamage);
+	}
 
 }//end while
 	
@@ -95,6 +107,7 @@ public:
 
 int main()
 {
+    srand(time(0)); 
     //Ask user for input
 
     int choice = 0;
