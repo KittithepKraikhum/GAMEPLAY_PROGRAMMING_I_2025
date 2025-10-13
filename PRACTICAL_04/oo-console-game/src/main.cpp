@@ -19,31 +19,51 @@ public:
     Game(std::string playerName, std::string npcName) : player(playerName), npc(npcName) {}
 
     void gameloop()
-    {
+    {    
+       int swordCool = 0;
+       int shieldCool = 0;
+       int defenCool = 0;
+ 
 	cout<<"You are an "<<player.getName()<<". Choose your action:"<<endl;
 
-         while (player.getHealth() > 0 && npc.getHealth() > 0)
+ while (player.getHealth() > 0 && npc.getHealth() > 0)
 {
+
 	if(player.getName() == "Orc")
 	{
-	  int choice = 0;
-	  int swordCool = 0;
-	  int shieldCool = 0;
-	  int defenCool = 0;
+          int choice = 0;
 
 	  cout<<"1. Sword Slash (Power: 15, Cooldown: "<<swordCool<<endl;
 	  cout<<"2. Shield Bash (Power: 25, Cooldwon: "<<shieldCool<<endl;
 	  cout<<"3. Defensive Stance (Negates next attack, Cooldown: "<<defenCool<<endl;
 	  cin>>choice;
-    	  
+    
+        if(swordCool > 0)  //Decrement coolDown after each round
+	{
+	 swordCool--;
+	}
+	if(shieldCool > 0) //Decrement coolDown after each round
+	{
+	 shieldCool--;
+	}
+	 if(defenCool > 0)
+	{
+	 defenCool--;
+	}
+
 	if(choice == 1)
-		{cout<<"You used Sword Slash!\n";
+	{       swordCool = 2; 
+		cout<<"You used Sword Slash!\n";
 		player.attack(npc,15);}
 	else if(choice == 2)
-		{cout<<"You used Shield Bash!\n";
+		{shieldCool = 1;
+		cout<<"You used Shield Bash!\n";
 		player.attack(npc,25);}
 	else if(choice == 3)
-		cout<<"You used Defensive Stance!\n";
+      	{  
+	  defenCool = 1;  
+          cout<<"You used Defensive Stance!\n";
+	}
 	
 	}//end if	 
 
@@ -74,6 +94,7 @@ public:
 	  int randomDamage = damage[rand()%2];	
 	  npc.attack(player, randomDamage);
 	}
+
 
 }//end while
 	
