@@ -20,6 +20,7 @@ void NPC::attack(GameObject &target,int t_damage)
     std::cout << name << " attacks " << target.getName() << "!" << std::endl;
     // Add logic to modify the target's health
     target.takeDamage(t_damage); // Example: deal 10 damage to the target
+    std::cout<<"\n";
 }
 
 // Optionally override defend method

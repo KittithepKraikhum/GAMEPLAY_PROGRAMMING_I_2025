@@ -27,23 +27,33 @@ public:
        bool defenceSkill = false; 
  
 	cout<<"You are an "<<player.getName()<<". Choose your action:"<<endl;
-
  while (player.getHealth() > 0 && npc.getHealth() > 0)
 {
 	if(player.getName() == "Orc")
 	{
           int choice = 0;
-
+          cout<<"Please select your skill\n";
 	  cout<<"1. Sword Slash (Power: 15, Cooldown: "<<swordCool<<endl;
 	  cout<<"2. Shield Bash (Power: 25, Cooldwon: "<<shieldCool<<endl;
 	  cout<<"3. Defensive Stance (Negates next attack, Cooldown: "<<defenCool<<endl;
+	  cout<<"\n";
 	  cin>>choice;
+
 	if(choice == 1 && swordCool > 0)
-		continue;
+		{
+		  std::cout<<"your skill is on cooldown\n";
+		  continue;
+		}
 	if(choice == 2 && shieldCool > 0)
-		continue;
+		{
+		 std::cout<<"your skill is on cooldown\n";
+		 continue;
+		}
 	if(choice == 3 && defenCool > 0)
-		continue;
+		{
+		 std::cout<<"your skill is on cooldown\n";
+		 continue;
+		}
     
         if(swordCool > 0 && onCoolDown == true)  //Decrement coolDown after each round
 	{
@@ -77,18 +87,21 @@ public:
 	}
 	else
 	   {
-		cout<<"Opps! looks like your skill is on cool down\n";
+		cout<<"Please select the appropriate skill in the list\n";
 		cout<<"Please choose you skill again\n";
+		cout<<"\n";
 		onCoolDown = false;
-		continue;}
+		continue;
+           }
 	}//end if	 
 
 
 	else if(player.getName() == "Troll")
         {
+	  cout<<"Please select your skill\n";
           int choice = 0;
-	  cout<<"1. Ground Stomp Shockwave (Power: 20, Cooldown: 3)\n";
-          cout<<"2. Club Smash (Power: 15, Cooldwon: 2)\n";
+	  cout<<"1. Ground Stomp Shockwave (Power: 20, Cooldown: "<<swordCool<<"\n";
+          cout<<"2. Club Smash (Power: 15, Cooldwon: "<<shieldCool<<"\n";
           cout<<"3. Thick Hide (Negates next attack, Cooldown: 3)\n";
 	 cin>>choice;
 
@@ -157,6 +170,7 @@ int main()
     std::cout<<"Please choose your character\n";
     std::cout<<"1. Orc\n";
     std::cout<<"2. Troll\n";
+    std::cout<<"\n";
     std::cin >> choice;
 
   std::string m_playerName = ""; 
