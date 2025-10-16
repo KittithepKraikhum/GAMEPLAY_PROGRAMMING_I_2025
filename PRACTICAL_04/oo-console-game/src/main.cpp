@@ -24,6 +24,7 @@ public:
        int shieldCool = 0;
        int defenCool = 0;
        bool onCoolDown = false;
+       bool defenceSkill = false; 
  
 	cout<<"You are an "<<player.getName()<<". Choose your action:"<<endl;
 
@@ -69,6 +70,7 @@ public:
 		player.attack(npc,25);}
 	else if(choice == 3 && defenCool == 0)
       	{  
+	  defenceSkill = true;
 	  defenCool = 3;
 	  onCoolDown = true;  
           cout<<"You used Defensive Stance!\n";
@@ -101,12 +103,17 @@ public:
 	
 	
 }
-	if(player.getName() == "Orc")
+	if(player.getName() == "Orc" && defenceSkill == false)
 	{
           //npc = troll damage 20 or 15
 	  int damage[] = {15,25};
 	  int randomDamage = damage[rand()%2];	
 	  npc.attack(player, randomDamage);
+	
+	}
+	else if(player.getName() == "Orc" && defenceSkill == true)
+	{
+	 npc.attack(player,0);
 	}
 
 
