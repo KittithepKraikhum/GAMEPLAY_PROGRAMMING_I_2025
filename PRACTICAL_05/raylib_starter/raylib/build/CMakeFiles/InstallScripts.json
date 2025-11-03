@@ -1,0 +1,10 @@
+{
+	"InstallScripts" : 
+	[
+		"C:/project05/GAMEPLAY_PROGRAMMING_I_2025/PRACTICAL_05/raylib_starter/raylib/build/cmake_install.cmake",
+		"C:/project05/GAMEPLAY_PROGRAMMING_I_2025/PRACTICAL_05/raylib_starter/raylib/build/raylib/cmake_install.cmake",
+		"C:/project05/GAMEPLAY_PROGRAMMING_I_2025/PRACTICAL_05/raylib_starter/raylib/build/raylib/external/glfw/cmake_install.cmake",
+		"C:/project05/GAMEPLAY_PROGRAMMING_I_2025/PRACTICAL_05/raylib_starter/raylib/build/raylib/external/glfw/src/cmake_install.cmake"
+	],
+	"Parallel" : false
+}
