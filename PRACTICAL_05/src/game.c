@@ -5,6 +5,9 @@
 Texture2D sprite;
 Vector2 spritePosition = { 0,438 };
 
+//customColor
+Color myColor = (Color){ 255, 220, 130, 255 };
+
 void InitGame() {
     printf("Game Initialized!\n");
     sprite = LoadTexture("resorce/player.png");
@@ -28,14 +31,14 @@ void DrawGame() {
     DrawRectangle(0, 0, 800, 600, BLUE);
 
     //Draw circle
-    DrawCircle(600, 100, 50, PURPLE);
+    DrawCircle(600, 100, 50, myColor);
 
     //draw sprite
     DrawTexture(sprite, spritePosition.x, spritePosition.y, WHITE);
 
 
     //ground rectangle
-    DrawRectangle(0, 500, 800, 100, BROWN);
+    DrawRectangle(0, 500, 800, 100, BLACK);
 
     //drawline
     DrawLine(0, 0, 400, 300, RED);
@@ -55,10 +58,28 @@ void DrawGame() {
     Vector2 v3 = { 600, 400 };  // Bottom-right vertex
 
     //House
-    DrawTriangle(v1, v2, v3, RED);
+    DrawTriangle(v1, v2, v3, BROWN);
 
     //Door
     DrawRectangle(530, 430, 40, 60, WHITE);
+
+    //WHITE line
+    DrawRectangle(700, 540, 80, 20, WHITE);
+
+    //WHITE line
+    DrawRectangle(550, 540, 80, 20, WHITE);
+
+    //WHITE line
+    DrawRectangle(400, 540, 80, 20, WHITE);
+
+    //WHITE line
+    DrawRectangle(250, 540, 80, 20, WHITE);
+
+    //WHITE line
+    DrawRectangle(100, 540, 80, 20, WHITE);
+
+    //WHITE line
+    DrawRectangle(-50, 540, 80, 20, WHITE);
 
 
 
