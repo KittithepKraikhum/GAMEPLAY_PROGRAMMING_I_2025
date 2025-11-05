@@ -16,10 +16,22 @@ void UpdateGame() {
 
 void DrawGame() {
     DrawText("Hello, Raylib Starter Kit!", 190, 180, 20, DARKBLUE);
-//    DrawCircle(50,50,50,RED);
-    //load sprite
-    DrawTexture(sprite, 0, 0, WHITE);
+   
+    //Draw circle
+    DrawCircle(600,100,50,ORANGE);
+
+    //draw sprite
+    DrawTexture(sprite, 0, 438, WHITE);
+    
+    //ground rectangle
     DrawRectangle(0,500,800,100,BROWN);
+
+    //drawline
+    DrawLine(0,0,400,300,RED);
+
+    //tree
+    DrawRectangle(100,100,50,-80,BROWN);
+         
 }
 
 void CloseGame() {
