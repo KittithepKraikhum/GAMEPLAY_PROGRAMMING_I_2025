@@ -2,8 +2,11 @@
 #include "stdio.h"
 #include "../include/game.h"
 
+Texture2D sprite;
+
 void InitGame() {
     printf("Game Initialized!\n");
+    sprite = LoadTexture("resorce/player.png");
 }
 
 void UpdateGame() {
@@ -13,7 +16,9 @@ void UpdateGame() {
 
 void DrawGame() {
     DrawText("Hello, Raylib Starter Kit!", 190, 180, 20, DARKBLUE);
-    DrawCircle(50,50,50,RED);
+//    DrawCircle(50,50,50,RED);
+    //load sprite
+    DrawTexture(sprite, 0, 0, WHITE);
 }
 
 void CloseGame() {
