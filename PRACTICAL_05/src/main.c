@@ -11,6 +11,8 @@
 const int screenWidth = 800;
 const int screenHeight = 600;
 
+
+
 void GameLoop(void);
 
 int main(void)
@@ -66,6 +68,8 @@ void GameLoop(void)
     DrawGame();
 
     counter++;
+
+
 
     EndDrawing();
 }
