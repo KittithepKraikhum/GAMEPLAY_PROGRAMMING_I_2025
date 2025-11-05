@@ -19,6 +19,7 @@ void DrawGame() {
 //    DrawCircle(50,50,50,RED);
     //load sprite
     DrawTexture(sprite, 0, 0, WHITE);
+    DrawRectangle(0,500,800,100,BROWN);
 }
 
 void CloseGame() {
