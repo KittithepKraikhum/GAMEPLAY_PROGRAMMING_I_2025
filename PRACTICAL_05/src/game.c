@@ -36,6 +36,18 @@ void DrawGame() {
 
       //tree
     DrawRectangle(300, 420, 20, 100, BROWN);
+
+    //House	
+    DrawRectangle(500,400,100,100,BROWN);
+    Vector2 v1 = { 550, 300 };  // Top vertex
+    Vector2 v2 = { 500, 400 };  // Bottom-left vertex
+    Vector2 v3 = { 600, 400 };  // Bottom-right vertex
+    
+    //House
+    DrawTriangle(v1, v2, v3, BLUE);
+
+   //Door
+   DrawRectangle(530,430,40,60,WHITE);
        
 }
 
