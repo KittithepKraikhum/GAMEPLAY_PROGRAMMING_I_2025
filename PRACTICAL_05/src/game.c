@@ -11,6 +11,7 @@ Color myColor = (Color){ 255, 220, 130, 255 };
 void InitGame() {
     printf("Game Initialized!\n");
     sprite = LoadTexture("resorce/player.png");
+
 }
 
 void UpdateGame() {
@@ -82,9 +83,10 @@ void DrawGame() {
     DrawRectangle(-50, 540, 80, 20, WHITE);
 
 
-
+   
 }
 
 void CloseGame() {
     printf("Game Closed!\n");
+    UnloadTexture(sprite);
 }
