@@ -97,36 +97,11 @@ case "$OS" in
 			pacman_install mingw-w64-ucrt-x86_64-nodejs
 			pacman_install mingw-w64-ucrt-x86_64-glfw
 
-			# Step 7: Clone the Raylib source code repository
-			STEP="Cloning Raylib source code repository"
-			cd "$DEST_DIR"
-			info_msg "Step 7: $STEP"
-
-			clone_repo https://github.com/raysan5/raylib.git "raylib"
-
-			# Step 8: Navigate to the Raylib source directory
-			STEP="Navigating to the Raylib source directory"
-			info_msg "Step 8: $STEP"
-			cd raylib
-
-			# Step 9: Create a build directory for Raylib
-			STEP="Creating a build directory for Raylib"
-			info_msg "Step 9: $STEP"
-			mkdir build && cd build
+			# Step 7: Install Raylib via Pacman 
+			STEP="Installing Raylib via Pacman" 
+			info_msg "Step 7: $STEP" 
+			pacman_install mingw-w64-ucrt-x86_64-raylib
 			
-			# Step 10: Generate Makefiles using CMake
-			STEP="Generating Makefiles using CMake"
-			info_msg "Step 10: $STEP"
-			cmake .. -G "Unix Makefiles" \
-			-DCMAKE_BUILD_TYPE=Release \
-			-DBUILD_EXAMPLES=OFF \
-			-DUSE_EXTERNAL_GLFW=OFF
-
-			# Step 11: Build Raylib using Make
-			STEP="Building Raylib using Make"
-			info_msg "Step 11: $STEP"
-			make
-
 			success_msg "raylib MYSYS2 Environment Setup Complete"
 
 		elif [[ -z "$BUILD_TYPE" || "$BUILD_TYPE" == "build_web" ]]; then
