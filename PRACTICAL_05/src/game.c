@@ -30,8 +30,13 @@ void DrawGame() {
     DrawLine(0,0,400,300,RED);
 
     //tree
-    DrawRectangle(100,100,50,-80,BROWN);
-         
+    //DrawRectangle(300, 400, 20, 100, BROWN);
+  
+    DrawRectangle(270,380,80,60,GREEN);
+
+      //tree
+    DrawRectangle(300, 420, 20, 100, BROWN);
+       
 }
 
 void CloseGame() {
