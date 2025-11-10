@@ -22,7 +22,7 @@ bool Circle::circle_to_circle(Circle* a,Circle* b)
 	float sumR = a->getRadius() + b->getRadius();
 
 		 //sqrt d <= sumR^2
-	return d <= sumR * sumR; //true == touching or overlapp
+	return d <= sumR * sumR; //if true == touching or overlapping
 }
 
 float Circle::getXpos()
