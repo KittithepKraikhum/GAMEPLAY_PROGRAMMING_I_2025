@@ -30,6 +30,10 @@ float Circle::getXpos()
 	return x;
 }
 
+float Circle::getYpos()
+{
+	return y;
+}
 
 float Circle::getRadius()
 {
