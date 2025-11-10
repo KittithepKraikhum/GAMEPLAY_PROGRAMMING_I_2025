@@ -27,15 +27,55 @@ bool Circle::circle_to_circle(Circle* a,Circle* b)
 
 float Circle::getXpos()
 {
-	return x;
+	return m_x;
 }
 
 float Circle::getYpos()
 {
-	return y;
+	return m_y;
 }
 
 float Circle::getRadius()
 {
 	return radius;
+}
+
+//start Rectangle definition
+float Rectangle::getXpos()
+{
+	return m_x;
+}
+
+float Rectangle::getYpos()
+{
+	return m_y;
+}
+
+float Rectangle::getWidth()
+{
+	return m_width;
+}
+
+float Rectangle::getHeight()
+{
+	return m_height;
+}
+
+//Checks if the boundaries of one rectangle intersect with the boundaries of another
+bool Rectangle::rectangle_to_rectangle(Rectangle* a, Rectangle* b)
+{
+	bool intersect;
+
+	if (a->getXpos() + a->getWidth() <= b->getXpos() ||
+		a->getXpos() >= b->getXpos() + b->getWidth() ||
+		a->getYpos() + a->getHeight() <= b->getYpos()||
+		a->getYpos() >= b->getYpos() + b->getHeight())
+	{
+		intersect = false; //they are not intersect
+	}
+	else
+	{
+		intersect = true;
+	}
+	return intersect;
 }

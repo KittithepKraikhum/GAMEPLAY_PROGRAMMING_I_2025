@@ -5,8 +5,8 @@
 
 class Circle {
 private:
-	float x; //Position
-	float y; 
+	float m_x; //Position
+	float m_y; 
 	
 	float radius; //Radius
 public:
@@ -26,11 +26,11 @@ public:
 
 class Rectangle {
 private:
-	float x; //Position
-	float y;
+	float m_x; //Position
+	float m_y;
 	
-	float width; //Dimensions
-	float height;
+	float m_width; //Dimensions
+	float m_height;
 
 public:
 	Rectangle(float xPos, float yPos, float w, float h);
@@ -38,9 +38,12 @@ public:
 	//get method
 	float getXpos();
 	float getYpos();
+	float getWidth();
+	float getHeight();
+
 
 	//Collision detection
-	bool rectangle_to_rectangle(Rectangle* a, Rectangle* b); 
+	bool rectangle_to_rectangle(Rectangle* a, Rectangle* b);
 
 
 
