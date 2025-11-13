@@ -40,6 +40,10 @@ float Circle::getRadius()
 	return radius;
 }
 
+Rectangle::Rectangle(float xPos, float yPos, float w, float h)
+{
+}
+
 //start Rectangle definition
 float Rectangle::getXpos()
 {
