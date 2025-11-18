@@ -40,19 +40,19 @@ int rectangleToCircle(Rect* box, Circle* circle)
 }
 
 
-int rayToCircle(Ray* ray, Circle* circle)
+int rayToCircle(Ray2* ray, Circle* circle)
 {
 	c2Raycast cast;
 	return c2RaytoCircle(ray->ray, circle->c, &cast);
 }
 
-int rayToAABB(Ray* ray, Rect* box)
+int rayToAABB(Ray2* ray, Rect* box)
 {
 	c2Raycast cast;
-	return c2RaytoAABB(ray->ray,box.a, &cast);
+	return c2RaytoAABB(ray->ray,box->a, &cast);
 }
 
-int rayToCapsule(Ray* ray, Capsule* capsule)
+int rayToCapsule(Ray2* ray, Capsule* capsule)
 {
 	c2Raycast cast;
 	return c2RaytoCapsule(ray->ray, capsule->cap, & cast);

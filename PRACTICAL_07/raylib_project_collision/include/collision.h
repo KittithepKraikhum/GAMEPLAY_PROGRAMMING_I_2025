@@ -22,7 +22,7 @@ typedef struct {
 
 typedef struct {
 	c2Ray ray; //actual cuteC2 ray
-}Ray;
+}Ray2;
 
 
 //c2Circle to Circle
@@ -50,15 +50,15 @@ int rectangleToCircle(Rect * box,Circle * circle);
 
 
 //c2Ray to Circle
-int rayToCircle(Ray* ray, Circle * circle);
+int rayToCircle(Ray2* ray, Circle * circle);
 
 
 //c2Ray to AABB
-int rayToAABB(Ray *ray,Rect* box);
+int rayToAABB(Ray2 *ray,Rect* box);
 
 
 //c2Ray to AABB
-int rayToCapsule(Ray* ray, Capsule* capsule);
+int rayToCapsule(Ray2* ray, Capsule* capsule);
 
 
 

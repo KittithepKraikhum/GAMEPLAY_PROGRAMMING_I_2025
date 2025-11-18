@@ -157,7 +157,12 @@ void UpdateGame(GameData *data)
 
 
                         //wrap
-			collision = circleToCircle(npc->collider.circle, data->player.circle);
+			Circle a = { npc->collider.circle };
+			Circle b = { data->player.circle };
+
+
+			collision = circleToCircle(&a,&b);
+
 			if (collision)
 			{
 				// Compute one or two points that represent the point of contact.
@@ -183,9 +188,10 @@ void UpdateGame(GameData *data)
 			// Circle vs AABB collision (cute_c2 built-in)
 			//collision = c2CircletoAABB(data->player.circle, npc->collider.aabb);
 
-
+			Circle a2 = { data->player.circle };
+			Rect rect = { npc->collider.aabb };
                         //wrap
-			collision = circleToAABB(data->player.circle, npc->collider.aabb);
+			collision = circleToAABB(&a2, &rect);
 
 			break;
 
@@ -193,8 +199,11 @@ void UpdateGame(GameData *data)
 			// Circle vs Capsule collision (cute_c2 built-in)
 			//collision = c2CircletoCapsule(data->player.circle, npc->collider.capsule);
 
+			Capsule c = { npc->collider.capsule };
+			Circle a3 = { data->player.circle };
+
 			//wrap
-			collision = capsuleToCircle(npc->collider.capsule, data->player.circle);
+			collision = capsuleToCircle(&c,&a3);
 			
 			
 			break;
