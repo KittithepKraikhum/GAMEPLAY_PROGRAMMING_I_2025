@@ -1,4 +1,5 @@
 #include "game.h"
+#include "collision.h"
 
 // Helper function to initialise an NPC based on index
 static void NPCFactory(NPC *npc, int typeIndex)
@@ -151,7 +152,9 @@ void UpdateGame(GameData *data)
 		{
 		case CIRCLE:
 			// Circle vs Circle collision (cute_c2 built-in)
-			collision = c2CircletoCircle(npc->collider.circle, data->player.circle);
+			// StarterKit uses
+			//collision = c2CircletoCircle(npc->collider.circle, data->player.circle);
+			collision = CircleToCircle(npc->collider.circle, data->player.circle);
 			if (collision)
 			{
 				// Compute one or two points that represent the point of contact.
