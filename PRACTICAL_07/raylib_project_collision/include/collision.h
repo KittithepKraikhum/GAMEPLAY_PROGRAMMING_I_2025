@@ -25,12 +25,6 @@ typedef struct {
 }Ray;
 
 
-
-
-
-
-
-
 //c2Circle to Circle
 int circleToCircle(Circle* a, Circle* b);
 
@@ -49,6 +43,24 @@ int rectangleToRectangle(Rect* a, Rect* b);
 
 //C2AABB to Capsule
 int rectangleToCapsule(Rect* box,Capsule* capsule);
+
+
+//C2AABB to Circle
+int rectangleToCircle(Rect * box,Circle * circle);
+
+
+//c2Ray to Circle
+int rayToCircle(Ray* ray, Circle * circle);
+
+
+//c2Ray to AABB
+int rayToAABB(Ray *ray,Rect* box);
+
+
+//c2Ray to AABB
+int rayToCapsule(Ray* ray, Capsule* capsule);
+
+
 
 
 
