@@ -2,8 +2,12 @@
 
 #include "collision.h"
 
-int CircleToCircle(c2Circle a, c2Circle b)
+int circleToCircle(c2Circle a, c2Circle b)
 {
     return c2CircletoCircle(a, b);
 }
 
+int circleToAABB(c2Circle circle, c2AABB box)
+{
+	return c2CircletoAABB(circle,box);
+}

@@ -5,7 +5,11 @@
 
 #include "cute_c2.h"
 
-int CircleToCircle(c2Circle a, c2Circle b);
+//Circle to circle
+int circleToCircle(c2Circle a, c2Circle b);
+
+//Circle to Rectangle
+int circleToAABB(c2Circle circle, c2AABB box);
 
 #endif
 

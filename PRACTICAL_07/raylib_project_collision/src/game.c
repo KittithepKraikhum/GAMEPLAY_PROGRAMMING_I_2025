@@ -154,7 +154,10 @@ void UpdateGame(GameData *data)
 			// Circle vs Circle collision (cute_c2 built-in)
 			// StarterKit uses
 			//collision = c2CircletoCircle(npc->collider.circle, data->player.circle);
-			collision = CircleToCircle(npc->collider.circle, data->player.circle);
+
+
+                        //wrap
+			collision = circleToCircle(npc->collider.circle, data->player.circle);
 			if (collision)
 			{
 				// Compute one or two points that represent the point of contact.
@@ -178,7 +181,10 @@ void UpdateGame(GameData *data)
 
 		case AABB:
 			// Circle vs AABB collision (cute_c2 built-in)
-			collision = c2CircletoAABB(data->player.circle, npc->collider.aabb);
+			//collision = c2CircletoAABB(data->player.circle, npc->collider.aabb);
+
+			collision = circleToAABB(data->player.circle, npc->collider.aabb);
+
 			break;
 
 		case CAPSULE:
