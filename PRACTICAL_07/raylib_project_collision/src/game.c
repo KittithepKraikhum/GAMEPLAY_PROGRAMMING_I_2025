@@ -194,7 +194,7 @@ void UpdateGame(GameData *data)
 			//collision = c2CircletoCapsule(data->player.circle, npc->collider.capsule);
 
 			//wrap
-			collision = circleToCapsule(data->player.circle, npc->collider.capsule);
+			collision = capsuleToCircle(npc->collider.capsule, data->player.circle);
 			
 			
 			break;

@@ -2,18 +2,34 @@
 
 #include "collision.h"
 
-int circleToCircle(c2Circle a, c2Circle b)
+int circleToCircle(Circle* a, Circle* b)
 {
-    return c2CircletoCircle(a, b);
+    return c2CircletoCircle(a->c, b->c);
 }
 
-int circleToAABB(c2Circle circle, c2AABB box)
+int circleToAABB(Circle* circle, Rect* box)
 {
-	return c2CircletoAABB(circle,box);
+	return c2CircletoAABB(circle->c,box->a);
 }
 
-int circleToCapsule(c2Circle circle, c2Capsule capsule)
+int capsuleToCircle(Capsule* capsule, Circle* circle)
 {
-	return c2CircletoCapsule(circle, capsule);
+	return c2CircletoCapsule(circle->c, capsule->cap);
 
+}
+
+int capsuleToAABB(Capsule* capsule, Rect* box)
+{
+	return c2AABBtoCapsule(box->a, capsule->cap);
+}
+
+int rectangleToRectangle(Rect* a, Rect* b)
+{
+	return  c2AABBtoAABB(a->a,b->a);
+}
+
+
+int rectangleToCapsule(Rect* box, Capsule* capsule)
+{
+	return c2AABBtoCapsule(box->a, capsule->cap);
 }
