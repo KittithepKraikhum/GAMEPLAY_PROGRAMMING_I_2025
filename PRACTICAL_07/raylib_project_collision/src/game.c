@@ -183,13 +183,20 @@ void UpdateGame(GameData *data)
 			// Circle vs AABB collision (cute_c2 built-in)
 			//collision = c2CircletoAABB(data->player.circle, npc->collider.aabb);
 
+
+                        //wrap
 			collision = circleToAABB(data->player.circle, npc->collider.aabb);
 
 			break;
 
 		case CAPSULE:
 			// Circle vs Capsule collision (cute_c2 built-in)
-			collision = c2CircletoCapsule(data->player.circle, npc->collider.capsule);
+			//collision = c2CircletoCapsule(data->player.circle, npc->collider.capsule);
+
+			//wrap
+			collision = circleToCapsule(data->player.circle, npc->collider.capsule);
+			
+			
 			break;
 		}
 

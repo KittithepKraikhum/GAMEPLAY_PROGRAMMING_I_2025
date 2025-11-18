@@ -11,5 +11,9 @@ int circleToCircle(c2Circle a, c2Circle b);
 //Circle to Rectangle
 int circleToAABB(c2Circle circle, c2AABB box);
 
+
+//Circle to Capsule
+int circleToCapsule(c2Circle circle, c2Capsule capsule);
+
 #endif
 

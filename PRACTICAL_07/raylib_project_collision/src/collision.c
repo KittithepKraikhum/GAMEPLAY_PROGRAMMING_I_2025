@@ -11,3 +11,9 @@ int circleToAABB(c2Circle circle, c2AABB box)
 {
 	return c2CircletoAABB(circle,box);
 }
+
+int circleToCapsule(c2Circle circle, c2Capsule capsule)
+{
+	return c2CircletoCapsule(circle, capsule);
+
+}
