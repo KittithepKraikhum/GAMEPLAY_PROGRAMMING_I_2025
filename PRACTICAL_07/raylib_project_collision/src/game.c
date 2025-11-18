@@ -32,6 +32,40 @@ static void NPCFactory(NPC *npc, int typeIndex)
 	npc->isColliding = false; // Initialise collision status
 }
 
+static void DrawNPCBoundingBox(const NPC *npc)
+{
+	switch (npc->type)
+{
+	case CIRCLE:
+	{
+		float left = npc->collider.circle.p.x - npc->collider.circle.r;
+		float top = npc->collider.circle.p.y - npc->collider.circle.r;
+		float size = npc->collider.circle.r * 2;
+
+		DrawRectangleLines(left,top,size,size,GREEN);
+		break;
+	}
+
+	case AABB:
+	{
+		float x = npc->collider.aabb.min.x;
+		float y = npc->collider.aabb.min.y;
+		float w = npc->collider.aabb.max.x - npc->collider.aabb.min.x;
+		float h = npc->collider.aabb.max.y - npc->collider.aabb.min.y;
+
+		DrawRectangleLines(x, y, w, h, npc->color);
+		break;
+	}
+
+	case CAPSULE:
+	{
+
+		break;
+	}
+}	
+
+}
+
 // Helper function to Draw an NPC
 static void DrawNPC(const NPC *npc)
 {
@@ -247,7 +281,13 @@ void DrawGame(const GameData *data)
 
 	// Draw NPCs
 	for (int i = 0; i < NUM_NPCS; i++)
+	{
 		DrawNPC(&data->npcs[i]);
+
+		DrawNPCBoundingBox(&data->npcs[i]);
+	}
+
+	//DrawNPCBoundingBox(&data->npcs[i]);
 
 	// Draw Player Texture (centred on circle)
 	Vector2 position = {data->player.circle.p.x, data->player.circle.p.y};
