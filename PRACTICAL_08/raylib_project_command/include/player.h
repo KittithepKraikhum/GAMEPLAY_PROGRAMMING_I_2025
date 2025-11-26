@@ -24,6 +24,7 @@ void MoveRight(Player *player);
 
 void Jump(Player *player);
 void Fire(Player *player);
+void Run(Player *player);
 
 void JumpFire(Player *player);
 void MoveUpFire(Player *player);

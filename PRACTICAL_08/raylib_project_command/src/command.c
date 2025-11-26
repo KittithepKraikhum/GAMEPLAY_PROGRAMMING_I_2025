@@ -71,3 +71,18 @@ void GetCommandBits(Command command, char *buffer)
     }
     buffer[COUNT] = '\0'; // null terminator
 }
+
+void Run(Player *player)
+{
+  if (IsKeyDown(KEY_W))
+    player->y -= 10; // move up quickly
+
+if (IsKeyDown(KEY_S))
+    player->y += 10; // move down quickly
+
+if (IsKeyDown(KEY_A))
+    player->x -= 10; // move left quickly
+
+if (IsKeyDown(KEY_D))
+    player->x += 10; // move right quickly
+}
