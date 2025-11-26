@@ -27,6 +27,8 @@ Command PollInput()
         command |= JUMP;
     if (IsMouseButtonDown(MOUSE_LEFT_BUTTON))
         command |= FIRE;
+    if (IsKeyDown(KEY_LEFT_SHIFT)) 
+        command |= RUN;
 
     TraceLog(LOG_INFO, "Keyboard Command %d", command);
 
@@ -46,6 +48,17 @@ Command PollInput()
             command |= JUMP;
         if (GetGamepadAxisMovement(0, GAMEPAD_AXIS_RIGHT_TRIGGER) > 0.5f)
             command |= FIRE;
+         // RUN
+        if (IsKeyDown(KEY_LEFT_SHIFT))
+        command |= RUN;
+
+        // CROUCH
+        if (IsKeyDown(KEY_LEFT_CONTROL))
+        command |= CROUCH;
+
+        // SHIELD
+        if (IsKeyDown(KEY_LEFT_ALT))
+        command |= SHIELD;
 
         TraceLog(LOG_INFO, "Controller Command %d", command);
     }

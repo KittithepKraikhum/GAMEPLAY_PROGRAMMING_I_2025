@@ -110,3 +110,29 @@ void JumpFire(Player *player)
 	ClampPlayerOnScreen(player);
 	printf("\n\nJumping and Firing\n\n");
 }
+
+//NEW!!
+void Run(Player *player)
+{ 
+if (IsKeyDown(KEY_W)) 
+player->y -= 10; 
+
+if (IsKeyDown(KEY_S)) 
+player->y += 10; 
+
+if (IsKeyDown(KEY_A)) 
+player->x -= 10; 
+
+if (IsKeyDown(KEY_D)) 
+player->x += 10;
+}
+
+void Crouch(Player *player)
+{ 
+player->color = BLUE;
+}
+
+void Shield(Player *player)
+{ 
+player->color = YELLOW;
+}

@@ -24,7 +24,9 @@ void MoveRight(Player *player);
 
 void Jump(Player *player);
 void Fire(Player *player);
-void Run(Player *player);
+void Run(Player *player); //NEW!!
+void Crouch(Player *player); //NEW!
+void Shield(Player *player); //NEW!
 
 void JumpFire(Player *player);
 void MoveUpFire(Player *player);
