@@ -117,6 +117,45 @@ void InitPlayerFSM(GameObject *object)
 
 	// Configure valid transitions for STATE_RESPAWN
 	StateTransitions(&object->stateConfigs[STATE_RESPAWN], respawnValidTransitions, sizeof(respawnValidTransitions) / sizeof(State));
+
+	// ---- STATE_ATTACK state configuration ----
+State attackValidTransitions[] = { STATE_CROUCH, STATE_SHIELD, STATE_IDLE };
+
+object->stateConfigs[STATE_ATTACK].name = "Player_Attack";
+object->stateConfigs[STATE_ATTACK].HandleEvent = PlayerAttackHandleEvent;
+object->stateConfigs[STATE_ATTACK].Entry = PlayerEnterAttack;
+object->stateConfigs[STATE_ATTACK].Update = PlayerUpdateAttack;
+object->stateConfigs[STATE_ATTACK].Exit = PlayerExitAttack;
+
+StateTransitions(&object->stateConfigs[STATE_ATTACK], attackValidTransitions,
+                 sizeof(attackValidTransitions) / sizeof(State));
+
+
+// ---- STATE_CROUCH state configuration ----
+State crouchValidTransitions[] = { STATE_ATTACK, STATE_SHIELD, STATE_IDLE };
+
+object->stateConfigs[STATE_CROUCH].name = "Player_Crouch";
+object->stateConfigs[STATE_CROUCH].HandleEvent = PlayerCrouchHandleEvent;
+object->stateConfigs[STATE_CROUCH].Entry = PlayerEnterCrouch;
+object->stateConfigs[STATE_CROUCH].Update = PlayerUpdateCrouch;
+object->stateConfigs[STATE_CROUCH].Exit = PlayerExitCrouch;
+
+StateTransitions(&object->stateConfigs[STATE_CROUCH], crouchValidTransitions,
+sizeof(crouchValidTransitions) / sizeof(State));
+
+
+// ---- STATE_SHIELD state configuration ----
+State shieldValidTransitions[] = { STATE_ATTACK, STATE_CROUCH, STATE_IDLE };
+
+object->stateConfigs[STATE_SHIELD].name = "Player_Shield";
+object->stateConfigs[STATE_SHIELD].HandleEvent = PlayerShieldHandleEvent;
+object->stateConfigs[STATE_SHIELD].Entry = PlayerEnterShield;
+object->stateConfigs[STATE_SHIELD].Update = PlayerUpdateShield;
+object->stateConfigs[STATE_SHIELD].Exit = PlayerExitShield;
+
+StateTransitions(&object->stateConfigs[STATE_SHIELD], shieldValidTransitions,
+                 sizeof(shieldValidTransitions) / sizeof(State));
+
 }
 
 // Handles events for the Player when in the Idle state
@@ -143,6 +182,18 @@ void PlayerIdleHandleEvent(GameObject *object, Event event, float deltaTime)
 	case EVENT_NONE:
 		object->previousState = object->currentState;
 		break;
+		
+	case EVENT_ATTACK:
+    ChangeState(object, STATE_ATTACK, deltaTime);
+    break;
+
+case EVENT_CROUCH:
+    ChangeState(object, STATE_CROUCH, deltaTime);
+    break;
+
+case EVENT_SHIELD:
+    ChangeState(object, STATE_SHIELD, deltaTime);
+    break;
 	// Ignore Events for other cases
 	case EVENT_RESPAWN:
 	case EVENT_COLLISION_START:
@@ -173,6 +224,17 @@ void PlayerMovingHandleEvent(GameObject *object, Event event, float deltaTime)
 	case EVENT_DIE:
 		ChangeState(object, STATE_DEAD, deltaTime);
 		break;
+	case EVENT_ATTACK:
+    ChangeState(object, STATE_ATTACK, deltaTime);
+    break;
+
+case EVENT_CROUCH:
+    ChangeState(object, STATE_CROUCH, deltaTime);
+    break;
+
+case EVENT_SHIELD:
+    ChangeState(object, STATE_SHIELD, deltaTime);
+    break;
 	// Ignore Events for other cases
 	case EVENT_MOVE:
 	case EVENT_RESPAWN:
@@ -196,6 +258,17 @@ void PlayerFiringHandleEvent(GameObject *object, Event event, float deltaTime)
 		// Transition to Dead state if a die event is received
 		ChangeState(object, STATE_DEAD, deltaTime);
 		break;
+		case EVENT_ATTACK:
+    ChangeState(object, STATE_ATTACK, deltaTime);
+    break;
+
+case EVENT_CROUCH:
+    ChangeState(object, STATE_CROUCH, deltaTime);
+    break;
+
+case EVENT_SHIELD:
+    ChangeState(object, STATE_SHIELD, deltaTime);
+    break;
 	// Ignore Events for other cases
 	case EVENT_NONE:
 	case EVENT_MOVE:
@@ -222,6 +295,17 @@ void PlayerJumpingHandleEvent(GameObject *object, Event event, float deltaTime)
 		// Transition to Dead state if a die event is received
 		ChangeState(object, STATE_DEAD, deltaTime);
 		break;
+		case EVENT_ATTACK:
+    ChangeState(object, STATE_ATTACK, deltaTime);
+    break;
+
+case EVENT_CROUCH:
+    ChangeState(object, STATE_CROUCH, deltaTime);
+    break;
+
+case EVENT_SHIELD:
+    ChangeState(object, STATE_SHIELD, deltaTime);
+    break;
 	// Ignore Events for other cases
 	case EVENT_NONE:
 	case EVENT_MOVE:
