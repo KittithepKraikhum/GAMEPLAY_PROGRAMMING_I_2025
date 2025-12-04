@@ -1,131 +1,82 @@
 #include "fsm.h"
-#include "gameobject.h"
+#include "gameobject.h"   // For GameObject struct
 
-// Handle an event for the given game object
-// This will trigger the appropriate event handler based on the current state
-void HandleEvent(GameObject *obj, Event event, float deltaTime)
+// ---------------------------------------------------------
+// Setup allowed transitions for one state
+// ---------------------------------------------------------
+void StateTransitions(StateConfig *stateConfig, State *transitions, int count)
 {
-    // Get the state configuration for the current state of the object
-    StateConfig *config = &obj->stateConfigs[obj->currentState];
-
-    // If a HandleEvent function is defined for this state, handle the event
-    if (config->HandleEvent)
-    {
-        config->HandleEvent(obj, event, deltaTime); // Call the state's event handler
-    }
+    stateConfig->nextStates = transitions;
+    stateConfig->nextStatesCount = count;
 }
 
-// Update the game object's state (e.g., to perform animations or actions)
-// This is called to execute the behavior for the current state
-void UpdateState(GameObject *obj, float deltaTime)
-{
-    // Get the configuration for the current state
-    StateConfig *config = &obj->stateConfigs[obj->currentState];
-
-    // If an update function is defined for the current state, call it
-    if (config->Update)
-    {
-        config->Update(obj, deltaTime); // Perform the update for the current state
-    }
-}
-
-// Check if the given game object can transition to the new state
-// This checks if the new state is valid according to nextStates
+// ---------------------------------------------------------
+// Can this state transition happen?
+// ---------------------------------------------------------
 bool CanEnterState(GameObject *obj, State newState)
 {
-    // Get the current state configuration
-    StateConfig *currentConfig = &obj->stateConfigs[obj->currentState];
+    StateConfig *cfg = &obj->stateConfigs[obj->currentState];
 
-    // Loop through the possible next states and check if newState is valid
-    for (int i = 0; i < currentConfig->nextStatesCount; i++)
+    for (int i = 0; i < cfg->nextStatesCount; i++)
     {
-        if (currentConfig->nextStates[i] == newState)
-            return true; // Valid transition found
+        if (cfg->nextStates[i] == newState)
+            return true;
     }
-    return false; // No valid transition found
+
+    return false;
 }
 
-// Change the state of the game object if the transition is valid
-// If the transition is valid, exit the current state and enter the new state
+// ---------------------------------------------------------
+// Change to new state
+// ---------------------------------------------------------
 bool ChangeState(GameObject *obj, State newState, float deltaTime)
 {
-    // Check if the state transition is valid
     if (!CanEnterState(obj, newState))
-    {
-        // If not valid, print an error message and return false
-        printf("Invalid state transition from %s to %s\n",
-               obj->stateConfigs[obj->currentState].name,
-               obj->stateConfigs[newState].name);
-        return false; // Transition failed
-    }
+        return false;
 
-    // Get the configuration of the current state and the new state
-    StateConfig *currentConfig = &obj->stateConfigs[obj->currentState];
-    StateConfig *newConfig = &obj->stateConfigs[newState];
+    // EXIT current state
+    if (obj->stateConfigs[obj->currentState].Exit)
+        obj->stateConfigs[obj->currentState].Exit(obj, deltaTime);
 
-    // Exit the current state if an exit function is defined
-    if (currentConfig->Exit)
-        currentConfig->Exit(obj, deltaTime);
-
-    // Update the object's previous and current state
     obj->previousState = obj->currentState;
     obj->currentState = newState;
 
-    // Enter the new state if an entry function is defined
-    if (newConfig->Entry)
-        newConfig->Entry(obj, deltaTime);
+    // ENTER new state
+    if (obj->stateConfigs[newState].Entry)
+        obj->stateConfigs[newState].Entry(obj, deltaTime);
 
-    return true; // State transition successful
+    return true;
 }
 
-// Helper function to initialize state transitions for a specific state
-void StateTransitions(StateConfig *stateConfig, State *transitions, int count)
+// ---------------------------------------------------------
+// Handle an event from current state
+// ---------------------------------------------------------
+void HandleEvent(GameObject *obj, Event event, float deltaTime)
 {
-    // Allocate memory for the next states array based on count
-    stateConfig->nextStates = (State *)malloc(sizeof(State) * count);
-    if (!stateConfig->nextStates)
-    {
-        fprintf(stderr, "Failed to allocate state transitions\n");
-        exit(1); // Exit if allocation fails
-    }
+    StateConfig *cfg = &obj->stateConfigs[obj->currentState];
 
-    // Copy the transitions array into stateConfig's nextStates
-    memcpy(stateConfig->nextStates, transitions, sizeof(State) * count);
-    stateConfig->nextStatesCount = count; // Set the count of next states
+    if (cfg->HandleEvent)
+        cfg->HandleEvent(obj, event, deltaTime);
 }
 
-// Helper function to print each state configuration's details
-void PrintStateConfigs(StateConfig *stateConfigs, int stateCount)
+// ---------------------------------------------------------
+// Update the current state
+// ---------------------------------------------------------
+void UpdateState(GameObject *obj, float deltaTime)
 {
-    // Loop through each state configuration and print its details
-    for (int i = 0; i < stateCount; i++)
+    StateConfig *cfg = &obj->stateConfigs[obj->currentState];
+
+    if (cfg->Update)
+        cfg->Update(obj, deltaTime);
+}
+
+// ----------------------------------------------------------
+// Debug print (optional)
+// ----------------------------------------------------------
+void PrintStateConfigs(StateConfig *stateConfigs, int count)
+{
+    for (int i = 0; i < count; i++)
     {
-        StateConfig *config = &stateConfigs[i];
-
-        // Print only if the state is properly set up (name is defined)
-        if (config->name == NULL)
-        {
-            continue;
-        }
-
-        // Print state name and handler function availability
-        printf("State: %s\n", config->name);
-        printf("\tHandleEvent: %s\n", config->HandleEvent ? "Defined" : "NULL");
-        printf("\tEntry: %s\n", config->Entry ? "Defined" : "NULL");
-        printf("\tUpdate: %s\n", config->Update ? "Defined" : "NULL");
-        printf("\tExit: %s\n", config->Exit ? "Defined" : "NULL");
-
-        // Print the list of next possible states for this state
-        printf("\tNext States: [");
-        for (int j = 0; j < config->nextStatesCount; j++)
-        {
-            if (j > 0)
-            {
-                printf(", ");
-            }
-            printf("%d", config->nextStates[j]);
-        }
-        printf("]\n");
-        printf("\tNext States Count: %d\n", config->nextStatesCount);
+        printf("State %d: %s\n", i, stateConfigs[i].name);
     }
 }

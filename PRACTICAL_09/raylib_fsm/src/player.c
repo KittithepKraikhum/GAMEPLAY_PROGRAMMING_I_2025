@@ -602,3 +602,145 @@ void PlayerExitRespawn(GameObject *object, float deltaTime)
 	player->base.timer = 0.0f;
 	player->base.r = DEFAULT_GAMEOBJECT_RADIUS;
 }
+
+void PlayerEnterAttack(GameObject *object, float deltaTime)
+{
+    (void)deltaTime;
+    Player *player = (Player*)object;
+    printf("\n%s -> ENTER -> Attack\n", object->name);
+
+    player->base.timer = 0.0f;
+    player->base.color = RED;
+}
+
+void PlayerUpdateAttack(GameObject *object, float deltaTime)
+{
+    Player *player = (Player*)object;
+    printf("\n%s -> UPDATE -> Attack\n", object->name);
+
+    player->base.timer += deltaTime;
+
+    // Attack is short (0.2 seconds) → go back to Idle
+    if (player->base.timer >= 0.20f)
+    {
+        ChangeState(object, STATE_IDLE, deltaTime);
+    }
+}
+
+
+void PlayerExitAttack(GameObject *object, float deltaTime)
+{
+    (void)deltaTime;
+    Player *player = (Player*)object;
+    printf("\n%s <- EXIT <- Attack\n", object->name);
+
+    player->base.timer = 0.0f;
+}
+
+void PlayerAttackHandleEvent(GameObject *object, Event event, float deltaTime)
+{
+    switch(event)
+    {
+        case EVENT_CROUCH:
+            ChangeState(object, STATE_CROUCH, deltaTime);
+            break;
+
+        case EVENT_SHIELD:
+            ChangeState(object, STATE_SHIELD, deltaTime);
+            break;
+
+        default:
+            break;
+    }
+}
+
+void PlayerEnterCrouch(GameObject *object, float deltaTime)
+{
+    (void)deltaTime;
+    Player *player = (Player*)object;
+    printf("\n%s -> ENTER -> Crouch\n", object->name);
+
+    player->base.color = BROWN;
+    player->base.r = DEFAULT_GAMEOBJECT_RADIUS * 0.6f;
+}
+
+void PlayerUpdateCrouch(GameObject *object, float deltaTime)
+{
+    Player *player = (Player*)object;
+    printf("\n%s -> UPDATE -> Crouch\n", object->name);
+
+    player->base.timer += deltaTime;
+}
+
+void PlayerExitCrouch(GameObject *object, float deltaTime)
+{
+    Player *player = (Player*)object;
+    printf("\n%s <- EXIT <- Crouch\n", object->name);
+
+    player->base.r = DEFAULT_GAMEOBJECT_RADIUS;
+}
+
+void PlayerCrouchHandleEvent(GameObject *object, Event event, float deltaTime)
+{
+    switch(event)
+    {
+        case EVENT_ATTACK:
+            ChangeState(object, STATE_ATTACK, deltaTime);
+            break;
+
+        case EVENT_SHIELD:
+            ChangeState(object, STATE_SHIELD, deltaTime);
+            break;
+
+        case EVENT_NONE:
+            ChangeState(object, STATE_IDLE, deltaTime);
+            break;
+
+        default:
+            break;
+    }
+}
+
+void PlayerEnterShield(GameObject *object, float deltaTime)
+{
+    (void)deltaTime;
+    Player *player = (Player*)object;
+    printf("\n%s -> ENTER -> Shield\n", object->name);
+
+    player->base.color = BLUE;
+}
+
+void PlayerUpdateShield(GameObject *object, float deltaTime)
+{
+    Player *player = (Player*)object;
+    printf("\n%s -> UPDATE -> Shield\n", object->name);
+}
+
+void PlayerExitShield(GameObject *object, float deltaTime)
+{
+    Player *player = (Player*)object;
+    printf("\n%s <- EXIT <- Shield\n", object->name);
+
+    player->base.color = GRAY; // FIXED
+}
+
+void PlayerShieldHandleEvent(GameObject *object, Event event, float deltaTime)
+{
+    switch(event)
+    {
+        case EVENT_ATTACK:
+            ChangeState(object, STATE_ATTACK, deltaTime);
+            break;
+
+        case EVENT_CROUCH:
+            ChangeState(object, STATE_CROUCH, deltaTime);
+            break;
+
+        case EVENT_NONE:
+            ChangeState(object, STATE_IDLE, deltaTime);
+            break;
+
+        default:
+            break;
+    }
+}
